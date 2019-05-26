@@ -1,2 +1,2 @@
 # DroolsIntro
-Spring and Drools Integration
+Spring and Drools Integration project
