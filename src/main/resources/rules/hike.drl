@@ -1,0 +1,47 @@
+package rules;
+
+import com.taxdrools.taxdrools.Model.Employee;
+
+global com.taxdrools.taxdrools.Model.Hike hike;
+
+
+
+rule "Suggest Director Hike"
+    when
+        Employee(exp > 20)
+        Employee(designation == "Director")
+        Employee ($sal : currentSalary)
+    then
+        hike.setSalaryAfterHike($sal + (( $sal * 10.0)/100));
+        hike.setHike(10);
+end
+
+rule "Suggest Senior Manager Hike" salience 0
+    when
+        Employee(exp > 15)
+        Employee(designation == "Manager")
+        Employee ($sal : currentSalary)
+    then
+        hike.setSalaryAfterHike($sal + (( $sal * 15.0)/100));
+        hike.setHike(15);
+end
+
+rule "Suggest Junior Manager Hike" salience 1
+    when
+        Employee(exp > 10)
+        Employee(designation == "Manager")
+        Employee ($sal : currentSalary)
+    then
+        hike.setSalaryAfterHike($sal + (( $sal * 17.0)/100));
+        hike.setHike(17);
+end
+
+rule "Suggest Architect Hike" salience 0
+    when
+        Employee(exp > 10)
+        Employee(designation == "Architect")
+        Employee ($sal : currentSalary)
+    then
+        hike.setSalaryAfterHike($sal + (( $sal * 17.0)/100));
+        hike.setHike(19);
+end
